@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        font-size: 14px;
+        white-space: nowrap;
+        text-align: right;
+        border: 1px solid black;
+        padding: 4px;
+      }
+
+      #myChart {
+        width: 100%;
+        max-width: 1200px;
+        max-height: 600px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <select id="function" name="function" onchange="onChange()">
+        <option selected value="difference">difference</option>
+        <option value="intersection">intersection</option>
+        <option value="uniq">uniq</option>
+        <option value="uniqBy">uniqBy</option>
+        <option value="sortBy">sortBy</option>
+      </select>
+      <canvas id="myChart"></canvas>
+      <div id="myTable"></div>
+    </div>
+
+    <script type="text/javascript" src="./utils/getData.js"></script>
+    <script type="text/javascript" src="./utils/constructTable.js"></script>
+    <script type="text/javascript" src="./utils/constructGraph.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <script>
+      let chart;
+      let tableWrapper = document.getElementById('myTable');
+      const ctx = document.getElementById('myChart');
+
+      const onChange = () => {
+        const functionName = document.getElementById('function').value;
+        drawGraph(functionName);
+        drawTable(functionName);
+      };
+
+      const drawGraph = (functionName) => {
+        getData(functionName).then((data) => {
+          chart?.destroy();
+          chart = constructGraph(data, ctx);
+        });
+      };
+
+      const drawTable = (functionName) => {
+        getData(functionName).then((data) => {
+          table = constructTable(data);
+          tableWrapper.innerHTML = '';
+          tableWrapper.appendChild(table);
+        });
+      };
+
+      onChange();
+    </script>
+  </body>
+</html>
