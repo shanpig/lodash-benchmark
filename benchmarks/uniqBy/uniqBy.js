@@ -9,19 +9,19 @@ const data = dataSizes.map((dataSize) =>
   Array.from({ length: dataSize }, () => ({ number: faker.number.int() }))
 );
 
-console.log(data);
-
 const lodashFunc = (array) => uniqBy(array, 'number');
 const nativeFunc = (array) => {
-  return array
-    .reduce((accumulator, currentValue) => {
-      const key = currentValue['number'];
-      if (!accumulator.has(key)) {
-        accumulator.set(key, currentValue);
-      }
-      return accumulator;
-    }, new Map())
-    .values();
+  return Array.from(
+    array
+      .reduce((acc, cur) => {
+        const key = cur['number'];
+        if (!acc.has(key)) {
+          acc.set(key, cur);
+        }
+        return acc;
+      }, new Map())
+      .values()
+  );
 };
 
 const { stats } = benchmark(data, lodashFunc, nativeFunc);
