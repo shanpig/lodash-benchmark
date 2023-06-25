@@ -1,4 +1,4 @@
-function constructGraph(data, ctx, maxSize = 0.5) {
+function constructGraph(data, ctx, maxSize = 500) {
   const { dataSizes, stats } = data;
 
   const barColors = {
