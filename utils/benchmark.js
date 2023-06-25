@@ -8,7 +8,7 @@ function benchmark(datasets, lodashFunc, nativeFunc) {
   };
 
   const logStart = function (data) {
-    console.log(`---------- data size: ${data.length} ---------`);
+    console.log(`---------- data size: ${data[0].length} ---------`);
   };
 
   const logCycle = function (event, data) {
@@ -16,6 +16,8 @@ function benchmark(datasets, lodashFunc, nativeFunc) {
     const nativeResult = nativeFunc(data);
 
     if (!isEqual(lodashResult, nativeResult)) {
+      console.log('lodash result: ', lodashResult);
+      console.log('native result: ', nativeResult);
       throw new Error('result is not the same !!');
     }
 
