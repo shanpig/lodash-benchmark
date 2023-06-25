@@ -1,4 +1,4 @@
-function constructGraph(data, ctx) {
+function constructGraph(data, ctx, maxSize = 0.5) {
   const { dataSizes, stats } = data;
 
   const barColors = {
@@ -25,7 +25,7 @@ function constructGraph(data, ctx) {
               type: 'line',
               mode: 'horizontal',
               scaleID: 'y',
-              value: 0.5,
+              value: 200,
               borderColor: 'tomato',
               borderWidth: 1,
             },
@@ -41,7 +41,7 @@ function constructGraph(data, ctx) {
           },
         },
         y: {
-          max: 10,
+          max: maxSize,
           beginAtZero: true,
           title: {
             display: true,
