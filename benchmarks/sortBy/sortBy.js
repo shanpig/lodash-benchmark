@@ -5,12 +5,12 @@ const { dataSizes } = require('../../utils/constants');
 const path = require('path');
 const sortBy = require('lodash/sortBy');
 
-const data = dataSizes.map((dataSize) =>
-  Array.from({ length: dataSize }, () => ({ number: faker.number.int() }))
-);
+const data = dataSizes.map((dataSize) => [
+  Array.from({ length: dataSize }, () => ({ number: faker.number.int() })),
+]);
 
-const lodashFunc = (array) => sortBy(array, 'number');
-const nativeFunc = (array) => array.sort((a, b) => a.number - b.number);
+const lodashFunc = ([array]) => sortBy(array, 'number');
+const nativeFunc = ([array]) => array.sort((a, b) => a.number - b.number);
 
 const { stats } = benchmark(data, lodashFunc, nativeFunc);
 

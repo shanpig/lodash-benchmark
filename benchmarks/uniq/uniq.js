@@ -5,12 +5,12 @@ const { benchmark } = require('../../utils/benchmark');
 const { writeToJson } = require('../../utils/writeToJson');
 const { dataSizes } = require('../../utils/constants');
 
-const data = dataSizes.map((dataSize) =>
-  Array.from({ length: dataSize }, () => faker.number.int())
-);
+const data = dataSizes.map((dataSize) => [
+  Array.from({ length: dataSize }, () => faker.number.int()),
+]);
 
-const lodashFunc = (array) => uniq(array);
-const nativeFunc = (array) => Array.from(new Set(array));
+const lodashFunc = ([array]) => uniq(array);
+const nativeFunc = ([array]) => Array.from(new Set(array));
 
 const { stats } = benchmark(data, lodashFunc, nativeFunc);
 
