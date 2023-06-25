@@ -24,7 +24,7 @@ function constructTable(data) {
     stats[funcName].forEach((time) => {
       const td = document.createElement('td');
       const truncatedTime = time.toFixed(4);
-      td.textContent = `${truncatedTime} s`;
+      td.textContent = `${truncatedTime} ms`;
       tr.appendChild(td);
     });
 

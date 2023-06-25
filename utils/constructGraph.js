@@ -49,7 +49,7 @@ function constructGraph(data, ctx) {
           },
           ticks: {
             callback: (value) => {
-              return value + 's';
+              return value + 'ms';
             },
           },
         },
